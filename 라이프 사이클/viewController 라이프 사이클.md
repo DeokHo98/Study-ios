@@ -51,17 +51,30 @@ viewDidDisappear는 viewWillDisAppear가 호출된 후에 컨트롤러에게 뷰
 1번째 viewWillDisappear 호출
 2번째 viewDidLoad 호출
 2번째 viewWillAppear 호출
-1번째 화면 없어짐
 1번째 viewDidDisappear 호출
-2번째 화면 나타남
 2번째 viewDidAppear 호출
 
 //여기서 다시 첫번째뷰로 넘어가면
 2번째 viewWillDisAppear 호출
 1번째 viewDidLoad는 호출되지않고 (이미 컨트롤러의 메모리가 로드된 후 이기때문에 호출이 되지않음)
 1번째 viewWillAppear 호출
-2번째 화면 없어짐
 2번째 viewDidDisappear 호출
-1번쨰 화면 나타남
 1번쨰 viewDidAppear 호출
+
+결론은 쉽게말해
+1. 네비게이션과 연결된 첫번째 뷰의 viewDidLoad는 딱한번만 실행된다.(백그라운드에 메모리가 살고 있다고 생각하면 편하다.)
+
+2. 뷰의 종료 시점에 나타나는 viewWillDisappear와 viewDidDisappear는 다른 뷰가 생성되는것보다 느릴수 있다는 것이다.
+
+3. 뷰의 종료는 다른뷰의 생성보다 느릴수있다. 그냥 느리다
+
+이런 결론으로 도출할수있는 것은
+
+1번째 뷰에서 만약 2번째 뷰로 넘어가면서 2번째 뷰에있는 UI레이블의 텍스트를 바꾸고싶다면?
+
+2번째 뷰의 UI레이블은 아직 생성이되지않았고 ui레이블이 아울렛에 연결되지도않았다 (viewdidload 호출 전) 
+
+그렇기때문에 앱은 크래쉬가 날것이다. 연결되지도 않은 레이블의 텍스트를 바꾸려고 하니.
+
+
 ```
