@@ -58,7 +58,7 @@ viewDidDisappear는 viewWillDisAppear가 호출된 후에 컨트롤러에게 뷰
 
 //여기서 다시 첫번째뷰로 넘어가면
 2번째 viewWillDisAppear 호출
-1번째 viewDidLoad는 실행되지않고
+1번째 viewDidLoad는 호출되지않고 (이미 컨트롤러의 메모리가 로드된 후 이기때문에 호출이 되지않음)
 1번째 viewWillAppear 호출
 2번째 화면 없어짐
 2번째 viewDidDisappear 호출
